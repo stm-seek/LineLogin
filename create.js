@@ -71,14 +71,14 @@ function createUser() {
         age != '') {
         
         generatToken();
-        axios.post('http://localhost:4000/create/parent', {
+        axios.post('https://lineapi.onrender.com/create/parent', {
                 name: nameParent,
                 phone: phone,
                 line_user_id: userLineID,
                 token: Token
             })
             .then(function (response) {
-                axios.post('http://localhost:4000/create/user', {
+                axios.post('https://lineapi.onrender.com/create/user', {
                         rfid: '',
                         firstName: firstName,
                         lastName: lastname,
@@ -106,7 +106,7 @@ function createUser() {
 
                 var dateNow = new Date();
 
-                axios.post('http://localhost:4000/push/message', {
+                axios.post('https://lineapi.onrender.com/push/message', {
                         user_child_id: userLineID,
                         name: nameParent,
                         date: dateNow.toDateString(),
