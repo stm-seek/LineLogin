@@ -71,14 +71,14 @@ function createUser() {
         age != '') {
         
         generatToken();
-        axios.post('https://lineapi.onrender.com/create/parent', {
+        axios.post('https://line-api-laoruthit.herokuapp.com/create/parent', {
                 name: nameParent,
                 phone: phone,
                 line_user_id: userLineID,
                 token: Token
             })
             .then(function (response) {
-                axios.post('https://lineapi.onrender.com/create/user', {
+                axios.post('https://line-api-laoruthit.herokuapp.com/create/user', {
                         rfid: '',
                         firstName: firstName,
                         lastName: lastname,
@@ -106,7 +106,7 @@ function createUser() {
 
                 var dateNow = new Date();
 
-                axios.post('https://lineapi.onrender.com/push/message', {
+                axios.post('https://line-api-laoruthit.herokuapp.com/push/message', {
                         user_child_id: userLineID,
                         name: nameParent,
                         date: dateNow.toDateString(),
