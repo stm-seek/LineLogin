@@ -1,4 +1,3 @@
-
 $("#formid").submit(function (e) {
     e.preventDefault();
 });
@@ -33,14 +32,13 @@ function logout() {
     location.reload();
 }
 
-function generatToken () {
-    /* let baseString = document.getElementById('name').value;
-    token = window.btoa(baseString); */
-    var rand = function() {
+function generatToken() {
+
+    var rand = function () {
         return Math.random().toString(36).substr(2);
     };
 
-    var token = function() {
+    var token = function () {
         return rand() + rand() + rand() + rand(); // to make it longer
     };
 
@@ -48,32 +46,38 @@ function generatToken () {
     console.log(Token);
 }
 
-/* function decodeToken() {
-    var painText = window.atob(token);
-    console.log(painText);
-} */
 
 function createUser() {
     let nameParent = document.getElementById('name').value;
+    let parent_age = document.getElementById('parent_age').value;
+    let salary = document.getElementById('salary').value;
     let phone = document.getElementById('phone').value;
-    
+
 
     let firstName = document.getElementById('user-firstname').value;
     let lastname = document.getElementById('user-lastname').value;
     let level = document.getElementById('level').value;
     let age = document.getElementById('age').value;
+    let height = document.getElementById('height').value;
+    let weight = document.getElementById('weight').value;
 
     if (nameParent != '' &&
+        parent_age != '' &&
+        salary != '' &&
         phone != '' &&
         level != 0 &&
         firstName != '' &&
         lastname != '' &&
-        age != '') {
-        
+        age != '' &&
+        height != '' &&
+        weight != '') {
+
         generatToken();
         axios.post('https://line-api-laoruthit.herokuapp.com/create/parent', {
                 name: nameParent,
                 phone: phone,
+                age: parent_age,
+                salary: salary,
                 line_user_id: userLineID,
                 token: Token
             })
@@ -83,6 +87,8 @@ function createUser() {
                         firstName: firstName,
                         lastName: lastname,
                         age: age,
+                        height: height,
+                        weight: weight,
                         level: level,
                         moneyUse: 0,
                         parentName: nameParent
@@ -96,11 +102,15 @@ function createUser() {
 
                 document.getElementById('name').value = '';
                 document.getElementById('phone').value = '';
-                
+                document.getElementById('parent_age').value = '';
+                document.getElementById('salary').value = '';
+
 
                 document.getElementById('user-firstname').value = '';
                 document.getElementById('user-lastname').value = '';
                 document.getElementById('level').value = 0;
+                document.getElementById('height').value = '';
+                document.getElementById('weight').value = '';
                 document.getElementById('age').value = '';
                 console.log(response);
 
@@ -126,7 +136,7 @@ function createUser() {
                     icon: 'success',
                     title: 'ลงทะเบียนสำเร็จ',
                     text: 'กรุณาบันทึก QRcode ที่ได้เพื่อนำไปรับ Wristband',
-                  })
+                })
             })
             .catch(function (error) {
                 console.log(error);
@@ -136,6 +146,6 @@ function createUser() {
             icon: 'error',
             title: 'มีบางอย่างผิดพลาด',
             text: 'กรุณาใส่ข้อมูลให้ครบถ้วน',
-          })
+        })
     }
 }
