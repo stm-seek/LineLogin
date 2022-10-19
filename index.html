@@ -44,8 +44,16 @@
                         <input type="text" class="form-control" id="name" placeholder="Satsawat Takwong">
                     </div>
                     <div class="mb-3">
+                        <label for="parent_age" class="form-label">อายุ</label>
+                        <input type="text" class="form-control" id="parent_age" placeholder="25">
+                    </div>
+                    <div class="mb-3">
                         <label for="phone" class="form-label">เบอร์โทรศัพท์</label>
-                        <input type="text" class="form-control" id="phone" placeholder="082-208-1800">
+                        <input type="text" class="form-control" id="phone" placeholder="082-xxx-xxxx">
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">รายได้ต่อเดือน (บาท)</label>
+                        <input type="text" class="form-control" id="c" placeholder="25,000">
                     </div>
 
                     <div class="divider">
@@ -78,7 +86,17 @@
                         <label for="age" class="form-label">อายุ</label>
                         <input type="text" class="form-control" id="age" placeholder="10">
                     </div>
-        
+
+                    <div class="mb-3">
+                        <label for="height" class="form-label">ส่วนสูง</label>
+                        <input type="text" class="form-control" id="height" placeholder="150">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">น้ำหนัก</label>
+                        <input type="text" class="form-control" id="weight" placeholder="40">
+                    </div>
+
                     <center>
                         <button onclick="createUser()" type="submit" class="btn btn-lg btn-primary mb-2 mt-2">ลงทะเบียน</button>
                         <button onclick="logout()" type="submit" class="btn btn-lg btn-danger mb-2 mt-2">ออกจากระบบ</button>
