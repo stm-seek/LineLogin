@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
+
     <script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
 
     <link rel="stylesheet" href="./style.css">
@@ -38,11 +38,16 @@
                     <h4 for="name" class="form-label mt-1 mb-3">ส่วนของผู้ปกครอง</h4>
                     <div class="mb-3">
                         <label for="name" class="form-label">ชื่อ - นามสกุล</label>
-                        <input type="text" class="form-control" id="name" >
+                        <input type="text" class="form-control" id="name">
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">เบอร์โทรศัพท์</label>
-                        <input type="text" class="form-control" id="phone" >
+                        <input type="text" class="form-control" id="phone">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="p-age" class="form-label">อายุ</label>
+                        <input type="text" class="form-control" id="p-age">
                     </div>
 
                     <div class="divider">
@@ -51,7 +56,7 @@
                     <h4 for="name" class="mt-4 form-label">ส่วนของนักเรียน</h4>
                     <div class="mb-3">
                         <label for="fist name" class="form-label">ชื่อ</label>
-                        <input type="text" class="form-control" id="user-firstname" >
+                        <input type="text" class="form-control" id="user-firstname">
                     </div>
                     <div class="mb-3">
                         <label for="last name" class="form-label">นามสกุล</label>
@@ -75,6 +80,10 @@
                         <label for="weight" class="form-label">น้ำหนัก</label>
                         <input type="text" class="form-control" id="weight">
                     </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">อายุ</label>
+                        <input type="text" class="form-control" id="age">
+                    </div>
 
                     <div class="mb-3">
                         <label for="level" class="form-label">ชั้นปี</label>
@@ -88,19 +97,15 @@
                             <option value="6">ประถมศึกษาปีที่ 6</option>
                         </select>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="age" class="form-label">อายุ</label>
-                        <input type="text" class="form-control" id="age" >
-                    </div>
-        
                     <center>
-                        <button onclick="createUser()" id="handleSubmit" type="submit" class="btn btn-lg btn-primary mb-2 mt-2">ลงทะเบียน</button>
+                        <button onclick="createUser()" id="handleSubmit" type="submit"
+                            class="btn btn-lg btn-primary mb-2 mt-2">ลงทะเบียน</button>
                         <button id="loading" class="btn btn-lg btn-primary mb-2 mt-2 loading" type="button">
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             <span class="sr-only">กำลังลงทะเบียน</span>
                         </button>
-                        <button onclick="logout()" type="submit" class="btn btn-lg btn-danger mb-2 mt-2">ออกจากระบบ</button>
+                        <button onclick="logout()" type="submit"
+                            class="btn btn-lg btn-danger mb-2 mt-2">ออกจากระบบ</button>
                     </center>
                 </form>
             </div>
