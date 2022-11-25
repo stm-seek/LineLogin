@@ -16,11 +16,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Line liff sdk login -->
+    
     <script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
-
-    <!-- <script src="sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css"> -->
 
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -41,19 +38,11 @@
                     <h4 for="name" class="form-label mt-1 mb-3">ส่วนของผู้ปกครอง</h4>
                     <div class="mb-3">
                         <label for="name" class="form-label">ชื่อ - นามสกุล</label>
-                        <input type="text" class="form-control" id="name" placeholder="Satsawat Takwong">
-                    </div>
-                    <div class="mb-3">
-                        <label for="parent_age" class="form-label">อายุ</label>
-                        <input type="text" class="form-control" id="parent_age" placeholder="25">
+                        <input type="text" class="form-control" id="name" >
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">เบอร์โทรศัพท์</label>
-                        <input type="text" class="form-control" id="phone" placeholder="082-xxx-xxxx">
-                    </div>
-                    <div class="mb-3">
-                        <label for="salary" class="form-label">รายได้ต่อเดือน (บาท)</label>
-                        <input type="text" class="form-control" id="salary" placeholder="25,000">
+                        <input type="text" class="form-control" id="phone" >
                     </div>
 
                     <div class="divider">
@@ -62,15 +51,23 @@
                     <h4 for="name" class="mt-4 form-label">ส่วนของนักเรียน</h4>
                     <div class="mb-3">
                         <label for="fist name" class="form-label">ชื่อ</label>
-                        <input type="text" class="form-control" id="user-firstname" placeholder="Satsawat">
+                        <input type="text" class="form-control" id="user-firstname" >
                     </div>
                     <div class="mb-3">
                         <label for="last name" class="form-label">นามสกุล</label>
-                        <input type="text" class="form-control" id="user-lastname" placeholder="Takwong">
+                        <input type="text" class="form-control" id="user-lastname">
                     </div>
 
                     <div class="mb-3">
-                        <label for="select" class="form-label">ชั้นปี</label>
+                        <label for="gender" class="form-label">เพศ</label>
+                        <select id="gender" class="form-select" aria-label="Default select example">
+                            <option value="0" selected>กรุณาเลือกเพศ</option>
+                            <option value="m">เพศชาย</option>
+                            <option value="f">เพศหญิง</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="level" class="form-label">ชั้นปี</label>
                         <select id="level" class="form-select" aria-label="Default select example">
                             <option value="0" selected>กรุณาเลือกชั้นปี</option>
                             <option value="1">ประถมศึกษาปีที่ 1</option>
@@ -84,21 +81,15 @@
 
                     <div class="mb-3">
                         <label for="age" class="form-label">อายุ</label>
-                        <input type="text" class="form-control" id="age" placeholder="10">
+                        <input type="text" class="form-control" id="age" >
                     </div>
-
-                    <div class="mb-3">
-                        <label for="height" class="form-label">ส่วนสูง</label>
-                        <input type="text" class="form-control" id="height" placeholder="150">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="weight" class="form-label">น้ำหนัก</label>
-                        <input type="text" class="form-control" id="weight" placeholder="40">
-                    </div>
-
+        
                     <center>
-                        <button onclick="createUser()" type="submit" class="btn btn-lg btn-primary mb-2 mt-2">ลงทะเบียน</button>
+                        <button onclick="createUser()" id="handleSubmit" type="submit" class="btn btn-lg btn-primary mb-2 mt-2">ลงทะเบียน</button>
+                        <button id="loading" class="btn btn-lg btn-primary mb-2 mt-2 loading" type="button">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">กำลังลงทะเบียน</span>
+                        </button>
                         <button onclick="logout()" type="submit" class="btn btn-lg btn-danger mb-2 mt-2">ออกจากระบบ</button>
                     </center>
                 </form>
