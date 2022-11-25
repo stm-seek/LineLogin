@@ -57,9 +57,13 @@ function createUser() {
     let level = document.getElementById('level').value;
     let age = document.getElementById('age').value;
     let gender = document.getElementById('gender').value;
+    let height = document.getElementById('height').value;
+    let weight = document.getElementById('weight').value;
 
     if (nameParent != '' &&
         phone != '' &&
+        height != '' &&
+        weight != '' &&
         level != 0 &&
         gender != 0 &&
         firstName != '' &&
@@ -81,6 +85,8 @@ function createUser() {
                         rfid: '',
                         firstName: firstName,
                         lastName: lastname,
+                        height: height,
+                        weight: weight,
                         age: age,
                         gender: gender,
                         level: level,
