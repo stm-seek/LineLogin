@@ -39,7 +39,7 @@ function generatToken() {
     };
 
     var token = function () {
-        return rand() + rand() + rand() + rand(); // to make it longer
+        return rand() + rand() + rand() + rand();
     };
 
     Token = token();
@@ -49,8 +49,6 @@ function generatToken() {
 
 function createUser() {
     let nameParent = document.getElementById('name').value;
-    let parent_age = document.getElementById('parent_age').value;
-    let salary = document.getElementById('salary').value;
     let phone = document.getElementById('phone').value;
 
 
@@ -58,26 +56,23 @@ function createUser() {
     let lastname = document.getElementById('user-lastname').value;
     let level = document.getElementById('level').value;
     let age = document.getElementById('age').value;
-    let height = document.getElementById('height').value;
-    let weight = document.getElementById('weight').value;
+    let gender = document.getElementById('gender').value;
 
     if (nameParent != '' &&
-        parent_age != '' &&
-        salary != '' &&
         phone != '' &&
         level != 0 &&
+        gender != 0 &&
         firstName != '' &&
         lastname != '' &&
-        age != '' &&
-        height != '' &&
-        weight != '') {
+        age != '') {
+
+        $('#handleSubmit').addClass('loading');
+        $('#loading').removeClass('loading');
 
         generatToken();
         axios.post('https://line-api-laoruthit.herokuapp.com/create/parent', {
                 name: nameParent,
                 phone: phone,
-                age: parent_age,
-                salary: salary,
                 line_user_id: userLineID,
                 token: Token
             })
@@ -87,8 +82,7 @@ function createUser() {
                         firstName: firstName,
                         lastName: lastname,
                         age: age,
-                        height: height,
-                        weight: weight,
+                        gender: gender,
                         level: level,
                         moneyUse: 0,
                         parentName: nameParent
@@ -102,17 +96,17 @@ function createUser() {
 
                 document.getElementById('name').value = '';
                 document.getElementById('phone').value = '';
-                document.getElementById('parent_age').value = '';
-                document.getElementById('salary').value = '';
 
 
                 document.getElementById('user-firstname').value = '';
                 document.getElementById('user-lastname').value = '';
                 document.getElementById('level').value = 0;
-                document.getElementById('height').value = '';
-                document.getElementById('weight').value = '';
                 document.getElementById('age').value = '';
-                console.log(response);
+                document.getElementById('gender').value = '';
+                setTimeout(function () {
+                    $('#handleSubmit').removeClass('loading');
+                    $('#loading').addClass('loading');
+                }, 2000)
 
                 var dateNow = new Date();
 
@@ -147,5 +141,10 @@ function createUser() {
             title: 'มีบางอย่างผิดพลาด',
             text: 'กรุณาใส่ข้อมูลให้ครบถ้วน',
         })
+
+        setTimeout(function () {
+            $('#handleSubmit').removeClass('loading');
+            $('#loading').addClass('loading');
+        }, 2000)
     }
 }
