@@ -50,6 +50,7 @@ function generatToken() {
 function createUser() {
     let nameParent = document.getElementById('name').value;
     let phone = document.getElementById('phone').value;
+    let p_age = document.getElementById('p-age').value;
 
 
     let firstName = document.getElementById('user-firstname').value;
@@ -62,6 +63,7 @@ function createUser() {
 
     if (nameParent != '' &&
         phone != '' &&
+        p_age != '' &&
         height != '' &&
         weight != '' &&
         level != 0 &&
@@ -78,6 +80,7 @@ function createUser() {
                 name: nameParent,
                 phone: phone,
                 line_user_id: userLineID,
+                age: p_age,
                 token: Token
             })
             .then(function (response) {
@@ -108,6 +111,7 @@ function createUser() {
                 document.getElementById('user-lastname').value = '';
                 document.getElementById('level').value = 0;
                 document.getElementById('age').value = '';
+                document.getElementById('p-age').value = '';
                 document.getElementById('gender').value = '';
                 setTimeout(function () {
                     $('#handleSubmit').removeClass('loading');
