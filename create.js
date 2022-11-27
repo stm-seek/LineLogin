@@ -2,7 +2,7 @@ $("#formid").submit(function (e) {
     e.preventDefault();
 });
 
-var userLineID;
+var userLineID = '';
 
 
 function runApp() {
@@ -61,7 +61,8 @@ function createUser() {
     let height = document.getElementById('height').value;
     let weight = document.getElementById('weight').value;
 
-    if (nameParent != '' &&
+    if (
+        nameParent != '' &&
         phone != '' &&
         p_age != '' &&
         height != '' &&
@@ -70,77 +71,97 @@ function createUser() {
         gender != 0 &&
         firstName != '' &&
         lastname != '' &&
-        age != '') {
+        age != ''
+    ) {
 
         $('#handleSubmit').addClass('loading');
         $('#loading').removeClass('loading');
 
         generatToken();
         axios.post('https://line-api-laoruthit.herokuapp.com/create/parent', {
+                /* https://line-api-laoruthit.herokuapp.com/create/parent */
                 name: nameParent,
                 phone: phone,
-                line_user_id: userLineID,
+                line_user_id: 'Ub8964ea0adaaea3ab31f5445693dd8a300000',
                 age: p_age,
                 token: Token
             })
             .then(function (response) {
-                axios.post('https://line-api-laoruthit.herokuapp.com/create/user', {
-                        rfid: '',
-                        firstName: firstName,
-                        lastName: lastname,
-                        height: height,
-                        weight: weight,
-                        age: age,
-                        gender: gender,
-                        level: level,
-                        moneyUse: 0,
-                        parentName: nameParent
+                //console.log(response.data.status);
+                if (response.data.status != 203) {
+                    axios.post('https://line-api-laoruthit.herokuapp.com/create/user', {
+                            rfid: '',
+                            firstName: firstName,
+                            lastName: lastname,
+                            height: height,
+                            weight: weight,
+                            age: age,
+                            gender: gender,
+                            level: level,
+                            moneyUse: 0,
+                            parentName: nameParent
+                        })
+                        .then(function (response) {
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+                    document.getElementById('name').value = '';
+                    document.getElementById('phone').value = '';
+
+
+                    document.getElementById('user-firstname').value = '';
+                    document.getElementById('user-lastname').value = '';
+                    document.getElementById('level').value = 0;
+                    document.getElementById('age').value = '';
+                    document.getElementById('p-age').value = '';
+                    document.getElementById('gender').value = '';
+                    setTimeout(function () {
+                        $('#handleSubmit').removeClass('loading');
+                        $('#loading').addClass('loading');
+                    }, 2000)
+
+                    var dateNow = new Date();
+
+                    axios.post('https://line-api-laoruthit.herokuapp.com/push/message', {
+                            user_child_id: userLineID,
+                            name: nameParent,
+                            date: dateNow.toDateString(),
+                            token: Token
+                        })
+                        .then(function (response) {
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+                    Swal.fire({
+                        imageUrl: 'https://api.qrserver.com/v1/create-qr-code/?data=' + Token + '&amp;size=150x150',
+                        imageHeight: 200,
+                        imageAlt: 'image qrcode',
+                        icon: 'success',
+                        title: 'ลงทะเบียนสำเร็จ',
+                        text: 'กรุณาบันทึก QRcode ที่ได้เพื่อนำไปรับ Wristband',
                     })
-                    .then(function (response) {
-                        console.log(response);
+                    setTimeout(function () {
+                        $('#handleSubmit').removeClass('loading');
+                        $('#loading').addClass('loading');
+                    }, 1000)
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'คุณได้เคยลงทะเบียนไว้แล้วในระบบ',
                     })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    setTimeout(function () {
+                        $('#handleSubmit').removeClass('loading');
+                        $('#loading').addClass('loading');
+                    }, 2000)
+                }
 
-                document.getElementById('name').value = '';
-                document.getElementById('phone').value = '';
-
-
-                document.getElementById('user-firstname').value = '';
-                document.getElementById('user-lastname').value = '';
-                document.getElementById('level').value = 0;
-                document.getElementById('age').value = '';
-                document.getElementById('p-age').value = '';
-                document.getElementById('gender').value = '';
-                setTimeout(function () {
-                    $('#handleSubmit').removeClass('loading');
-                    $('#loading').addClass('loading');
-                }, 2000)
-
-                var dateNow = new Date();
-
-                axios.post('https://line-api-laoruthit.herokuapp.com/push/message', {
-                        user_child_id: userLineID,
-                        name: nameParent,
-                        date: dateNow.toDateString(),
-                        token: Token
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
-                Swal.fire({
-                    imageUrl: 'https://api.qrserver.com/v1/create-qr-code/?data=' + Token + '&amp;size=150x150',
-                    imageHeight: 200,
-                    imageAlt: 'image qrcode',
-                    icon: 'success',
-                    title: 'ลงทะเบียนสำเร็จ',
-                    text: 'กรุณาบันทึก QRcode ที่ได้เพื่อนำไปรับ Wristband',
-                })
             })
             .catch(function (error) {
                 console.log(error);
