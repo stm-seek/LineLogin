@@ -82,7 +82,7 @@ function createUser() {
                 /* https://line-api-laoruthit.herokuapp.com/create/parent */
                 name: nameParent,
                 phone: phone,
-                line_user_id: 'Ub8964ea0adaaea3ab31f5445693dd8a300000',
+                line_user_id: userLineID,
                 age: p_age,
                 token: Token
             })
